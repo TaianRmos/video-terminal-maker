@@ -1,0 +1,4 @@
+timg
+opencv-python
+pyinstaller
+colorama
