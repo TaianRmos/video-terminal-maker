@@ -60,7 +60,15 @@ def main():
     if want_vbs == 'y':
         vbs_title = input("\nPlease enter the title you want to display for your message box:\n")
         vbs_content = input("Please enter the text you want to display for your message box:\n")
-        write_vbs_file(project_name, vbs_title, vbs_content)
+        want_loop = input(Style.RESET_ALL + "\nDo you want to make the vbs file to loop and get duplicated ? (y or n)\n")
+        while not (want_loop == 'y' or want_loop == 'n'):
+            want_loop = input("Please enter a valid input ('y' for yes, 'n' for no):")
+        
+        if want_loop == 'y':
+            write_vbs_file(project_name, vbs_title, vbs_content, True)
+        else:
+            write_vbs_file(project_name, vbs_title, vbs_content, False)
+            
         print(Fore.GREEN + "Successfully created the '.vbs' file")
 
 
