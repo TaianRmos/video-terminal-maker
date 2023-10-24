@@ -11,4 +11,6 @@ To get started, you just have to put a video in the <code>/video</code> folder t
 
 You also have the possibility to create a <code>.vbs</code> file that launches the program when it's closed. It's useless but was made as a joke at the beginning and I decided to let it in since it's only an option.
 
+One of the option in that <code>.vbs</code> file is to loop forever and get duplicated each time. When you do that, the file is detected as a virus on any other machine and gets deleted instantly if you try to move it on another machine. So now you have a new python <code>.exe</code> file to create the <code>.vbs</code> script directly on the machine instead of copying it.
+
 Have fun !
