@@ -1,5 +1,5 @@
 from convert_video_to_images import create_images
-from write_vbs_file import write_vbs_file
+from create_vbs_writer import create_vbs_writer
 import os
 from colorama import Fore, Back, Style, init
 
@@ -52,7 +52,7 @@ def main():
 
 
 
-    # Creation of the vbs file if wanted
+    # Creation of the vbs writer file if wanted, then create the exe file for the writer
     want_vbs = input(Style.RESET_ALL + "\nDo you want to create a vbs file to display a message box that launch the '.exe' file when closed ? (y or n)\n")
     while not (want_vbs == 'y' or want_vbs == 'n'):
         want_vbs = input("Please enter a valid input ('y' for yes, 'n' for no):")
@@ -65,19 +65,31 @@ def main():
             want_loop = input("Please enter a valid input ('y' for yes, 'n' for no):")
         
         if want_loop == 'y':
-            write_vbs_file(project_name, vbs_title, vbs_content, True)
+            create_vbs_writer(project_name, vbs_title, vbs_content, True)
         else:
-            write_vbs_file(project_name, vbs_title, vbs_content, False)
-            
-        print(Fore.GREEN + "Successfully created the '.vbs' file")
+            create_vbs_writer(project_name, vbs_title, vbs_content, False)
+        
+        # Run the pyinstaller command to create the '.exe' file, then move the file to the right directory
+        print("\nStart building the 'exe' file:")
+        os.system("pyinstaller --onefile set_vbs.py")
+        os.system(f"move .\dist\set_vbs.exe {project_name}")
+        os.system("rd /s /q build")
+        os.system("rd /s /q dist")
+        os.system("del set_vbs.spec")
+        os.system("del set_vbs.py")
+        print(Fore.GREEN + "Successfully created the executable file")
+
 
 
 
     # End printing
-    print(Style.RESET_ALL + """
+    print(Style.RESET_ALL + f"""
 =========================================================================================
 The project has been correctly created
-To launch your project, you can start the '.exe' file or the '.vbs' file if you created one
+To launch your project, you can start the '{project_name}.exe' file or the 'set_vbs.exe' file if you wanted a '.vbs'
+Note that if you want to copy paste the folder on another computer, the vbs file will automatically be recognized as a virus
+It will then be destroyed by the target's computer
+In that case, run the 'set_vbs.exe' when the folder is already on the target's computer
 """)
 
 
