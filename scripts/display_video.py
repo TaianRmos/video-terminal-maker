@@ -1,6 +1,9 @@
 import timg, os, time
 
 def main():
+    """
+    Display the video
+    """
     img = timg.Renderer()
     files = os.listdir("images/")
 
