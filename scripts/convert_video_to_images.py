@@ -1,5 +1,6 @@
 import cv2
 # Mon test
+# Test Mathieu
 
 def create_images(video_path, images_directory, max_number_of_images):
     # Load the video with cv2
